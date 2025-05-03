@@ -161,8 +161,9 @@ namespace BeamModTextureOptimiser
                 }
                 string result = reader.ReadToEnd();
                 reader.Close();
-                foreach (var occurrence in toReplaceStrings) {
-                    result.Replace($"\"{occurrence}\"", $"\"/vehicles/common/textures/{occurrence}\"");
+                foreach (var occurrence in toReplaceStrings) 
+                {
+                    result = result.Replace($"\"{occurrence}\"", $"\"/vehicles/common/textures/{occurrence}\"");
                 }
                 try
                 {
@@ -199,6 +200,10 @@ namespace BeamModTextureOptimiser
             return duplicates;
         }
 
+        public uint GetNumDuplicates()
+        {
+            return totalDuplicates;
+        }
         public void DeleteBak()
         {
             throw new NotImplementedException();

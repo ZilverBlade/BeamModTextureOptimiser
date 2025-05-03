@@ -60,6 +60,12 @@ namespace BeamModTextureOptimiser
 
         private void remapDuplicatesBtn_Click(object sender, EventArgs e)
         {
+            if (context.GetNumDuplicates() == 0)
+            {
+                MessageBox.Show("No duplicates exist. No need to remap",
+                    "Already dupe free", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             if (MessageBox.Show("This action cannot be undone! You are responsible for backing up your files.\n" +
                 "Do you want to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
@@ -68,11 +74,13 @@ namespace BeamModTextureOptimiser
                     context.RemapDuplicates(out int failedMoves, out int failedDeletes, out int failedRewrites);
                     if (failedMoves > 0 || failedDeletes > 0 || failedRewrites > 0) {
                         MessageBox.Show($"Remapped textures with failures! Please verify if the mod is intact!\n" +
-                            $"{failedMoves} Failed moves\n{failedDeletes} Failed deletions\n{failedRewrites} Failed rewrites");
+                            $"{failedMoves} Failed moves\n{failedDeletes} Failed deletions\n{failedRewrites} Failed rewrites",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     else
                     {
-                        MessageBox.Show("Successfully remapped all textures! (No failures occurred)");
+                        MessageBox.Show("Successfully remapped all textures! (No failures occurred)", 
+                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch (Exception ex)
