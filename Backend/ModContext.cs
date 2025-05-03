@@ -28,9 +28,9 @@ namespace BeamModTextureOptimiser
         {
             Debug.Assert(path != null && dirInfo != null, "Path cannot be null!");
 
-            foreach (var file in dirInfo.EnumerateFiles(path, SearchOption.AllDirectories))
+            foreach (var file in dirInfo.EnumerateFiles("*.dds", SearchOption.AllDirectories))
             {
-                TextureIdentifier identifier = new TextureIdentifier(file.Name);
+                TextureIdentifier identifier = new TextureIdentifier(file.Name, file.Length);
                 TextureInfo info = new TextureInfo(file.FullName, file.Length);
 
                 List<TextureInfo> infoList = null;
@@ -69,6 +69,7 @@ namespace BeamModTextureOptimiser
                 info.name = kv.Key.fileName;
                 info.size = kv.Value[0].fileSize;
                 info.numDuplicates = kv.Value.Count;
+                duplicates.Add(info);
             }
             return duplicates;
         }

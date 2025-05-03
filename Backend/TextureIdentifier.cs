@@ -7,10 +7,12 @@ namespace BeamModTextureOptimiser
     public class TextureIdentifier
     {
         public readonly string fileName;
+        public readonly long fileSize;
 
-        public TextureIdentifier(string fileName)
+        public TextureIdentifier(string fileName, long fileSize)
         {
             this.fileName = fileName;
+            this.fileSize = fileSize;
         }
 
         public override int GetHashCode()

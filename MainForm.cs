@@ -44,9 +44,10 @@ namespace BeamModTextureOptimiser
                 long totalExtraSize = 0;
                 foreach (var info in context.GetDuplicateInfos()) 
                 {
-                    duplicateTexturesListbox.Items.Add($"{info.name} : {info.size} kB ({info.numDuplicates} dupes!)");
+                    duplicateTexturesListbox.Items.Add($"{info.name} : {info.size / 1024} kB ({info.numDuplicates} dupes!)");
                     totalExtraSize += (info.numDuplicates - 1) * info.size;
                 }
+                excessStorageStatisticLabel.Text = $"Excess (uncompresed) storage: {totalExtraSize / (1<<20)} MB";
             }
             catch (Exception ex)
             {
