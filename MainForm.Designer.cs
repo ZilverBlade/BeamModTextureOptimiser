@@ -32,6 +32,7 @@ namespace BeamModTextureOptimiser
             this.duplicateTexturesListbox = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.duplicateTexturesLabel = new System.Windows.Forms.Label();
+            this.bakExcessLabel = new System.Windows.Forms.Label();
             this.excessStorageStatisticLabel = new System.Windows.Forms.Label();
             this.deleteBakFiles = new System.Windows.Forms.Button();
             this.loadModBtn = new System.Windows.Forms.Button();
@@ -73,6 +74,7 @@ namespace BeamModTextureOptimiser
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.bakExcessLabel);
             this.splitContainer1.Panel2.Controls.Add(this.excessStorageStatisticLabel);
             this.splitContainer1.Panel2.Controls.Add(this.deleteBakFiles);
             this.splitContainer1.Panel2.Controls.Add(this.loadModBtn);
@@ -94,6 +96,15 @@ namespace BeamModTextureOptimiser
             this.duplicateTexturesLabel.TabIndex = 1;
             this.duplicateTexturesLabel.Text = "Duplicate Textures:";
             // 
+            // bakExcessLabel
+            // 
+            this.bakExcessLabel.AutoSize = true;
+            this.bakExcessLabel.Location = new System.Drawing.Point(13, 99);
+            this.bakExcessLabel.Name = "bakExcessLabel";
+            this.bakExcessLabel.Size = new System.Drawing.Size(269, 15);
+            this.bakExcessLabel.TabIndex = 8;
+            this.bakExcessLabel.Text = "Excess (uncompressed) .bak (backup file) storage:";
+            // 
             // excessStorageStatisticLabel
             // 
             this.excessStorageStatisticLabel.AutoSize = true;
@@ -105,7 +116,8 @@ namespace BeamModTextureOptimiser
             // 
             // deleteBakFiles
             // 
-            this.deleteBakFiles.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.deleteBakFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteBakFiles.Enabled = false;
             this.deleteBakFiles.Location = new System.Drawing.Point(13, 389);
             this.deleteBakFiles.Name = "deleteBakFiles";
             this.deleteBakFiles.Size = new System.Drawing.Size(114, 47);
@@ -128,6 +140,7 @@ namespace BeamModTextureOptimiser
             // remapDuplicatesBtn
             // 
             this.remapDuplicatesBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.remapDuplicatesBtn.Enabled = false;
             this.remapDuplicatesBtn.Location = new System.Drawing.Point(306, 442);
             this.remapDuplicatesBtn.Name = "remapDuplicatesBtn";
             this.remapDuplicatesBtn.Size = new System.Drawing.Size(114, 47);
@@ -139,6 +152,7 @@ namespace BeamModTextureOptimiser
             // checkDuplicatesBtn
             // 
             this.checkDuplicatesBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.checkDuplicatesBtn.Enabled = false;
             this.checkDuplicatesBtn.Location = new System.Drawing.Point(160, 442);
             this.checkDuplicatesBtn.Name = "checkDuplicatesBtn";
             this.checkDuplicatesBtn.Size = new System.Drawing.Size(114, 47);
@@ -152,9 +166,9 @@ namespace BeamModTextureOptimiser
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 15);
+            this.label1.Size = new System.Drawing.Size(105, 15);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Mod folder (Root)";
+            this.label1.Text = "Mod folder (Root!)";
             // 
             // browseModFolderBtn
             // 
@@ -208,6 +222,7 @@ namespace BeamModTextureOptimiser
         private System.Windows.Forms.Button remapDuplicatesBtn;
         private System.Windows.Forms.Button loadModBtn;
         private System.Windows.Forms.Button deleteBakFiles;
+        private System.Windows.Forms.Label bakExcessLabel;
         private System.Windows.Forms.Label excessStorageStatisticLabel;
     }
 }
