@@ -42,19 +42,23 @@ namespace BeamModTextureOptimiser
 
             Debug.Assert(path != null && vehicleDirInfo != null, "Path cannot be null!");
 
-            foreach (var file in vehicleDirInfo.EnumerateFiles("*.dds", SearchOption.AllDirectories))
+            foreach (var folder in vehicleDirInfo.EnumerateDirectories())
             {
-                TextureIdentifier identifier = new TextureIdentifier(file.Name, file.Length);
-                TextureInfo info = new TextureInfo(file.FullName, file.Length);
-
-                List<TextureInfo> infoList = null;
-                if (!mappedDuplicates.TryGetValue(identifier, out infoList))
+                // only check root!! anything in specialised folders is probably vehicle specific anyway
+                foreach (var file in folder.EnumerateFiles("*.dds", SearchOption.TopDirectoryOnly))
                 {
-                    infoList = new List<TextureInfo>();
-                    mappedDuplicates.Add(identifier, infoList);
-                }
+                    TextureIdentifier identifier = new TextureIdentifier(file.Name, file.Length);
+                    TextureInfo info = new TextureInfo(file.FullName, file.Length);
 
-                infoList.Add(info);
+                    List<TextureInfo> infoList = null;
+                    if (!mappedDuplicates.TryGetValue(identifier, out infoList))
+                    {
+                        infoList = new List<TextureInfo>();
+                        mappedDuplicates.Add(identifier, infoList);
+                    }
+
+                    infoList.Add(info);
+                }
             }
             List<TextureIdentifier> toRemove = new List<TextureIdentifier>();
             foreach (var kv in mappedDuplicates)
