@@ -137,16 +137,16 @@ namespace BeamModTextureOptimiser
             }
             uint numCars = 0;
             currProg = 0;
-            foreach (var _ in vehicleDirInfo.EnumerateFiles("main.materials.json", SearchOption.AllDirectories))
+            foreach (var _ in vehicleDirInfo.EnumerateFiles("*.materials.json", SearchOption.AllDirectories))
             {
                 ++numCars;
             }
-            progress.SetLine(0, "Refactoring main.materials.json", false, IntPtr.Zero);
+            progress.SetLine(0, "Refactoring materials.json", false, IntPtr.Zero);
             progress.SetProgress(0, numCars);
             progress.SetLine(2, "", false, IntPtr.Zero);
 
             // now fix the main.materials.json
-            foreach (var file in vehicleDirInfo.EnumerateFiles("main.materials.json", SearchOption.AllDirectories))
+            foreach (var file in vehicleDirInfo.EnumerateFiles("*.materials.json", SearchOption.AllDirectories))
             {
                 progress.SetLine(1, $"Rewriting vehicle {file.Directory.Name}", false, IntPtr.Zero);
                 StreamReader reader;
@@ -163,7 +163,7 @@ namespace BeamModTextureOptimiser
                 reader.Close();
                 foreach (var occurrence in toReplaceStrings) 
                 {
-                    result = result.Replace($"\"{occurrence}\"", $"\"/vehicles/common/textures/{occurrence}\"");
+                    result = result.Replace($"\"{occurrence}\"", $"\"/vehicles/common/textures/{occurrence}\"", StringComparison.OrdinalIgnoreCase);
                 }
                 try
                 {

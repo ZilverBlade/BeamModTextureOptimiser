@@ -11,7 +11,7 @@ namespace BeamModTextureOptimiser
 
         public TextureIdentifier(string fileName, long fileSize)
         {
-            this.fileName = fileName;
+            this.fileName = fileName.ToLower();
             this.fileSize = fileSize;
         }
 

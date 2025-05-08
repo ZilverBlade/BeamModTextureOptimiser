@@ -11,7 +11,7 @@ namespace BeamModTextureOptimiser
 
         public TextureInfo(string fullPath, long fileSize)
         {
-            this.fullPath = fullPath;
+            this.fullPath = fullPath.ToLower();
             this.fileSize = fileSize;
         }
 
