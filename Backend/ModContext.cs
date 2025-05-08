@@ -169,6 +169,8 @@ namespace BeamModTextureOptimiser
                 foreach (var occurrence in toReplaceStrings) 
                 {
                     result = result.Replace($"\"{occurrence}\"", $"\"/vehicles/common/textures/{occurrence}\"", StringComparison.OrdinalIgnoreCase);
+                    // in case if it's using an absolute path instead
+                    result = result.Replace($"\"/vehicles/{file.Directory.Name}/{occurrence}\"", $"\"/vehicles/common/textures/{occurrence}\"", StringComparison.OrdinalIgnoreCase);
                 }
                 try
                 {
