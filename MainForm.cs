@@ -30,6 +30,7 @@ namespace BeamModTextureOptimiser
                 context.LoadPath(modPathTextBox.Text);
                 checkDuplicatesBtn.Enabled = true;
                 deleteBakFiles.Enabled = true;
+                findBakFilesBtn.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -90,15 +91,32 @@ namespace BeamModTextureOptimiser
             }
         }
 
-        private void deleteBakFiles_Click(object sender, EventArgs e)
+        private void findBakFilesBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                context.DeleteBak();
+                context.FindBak();
+                bakExcessLabel.Text = $"Excess (uncompressed) .bak (backup file) storage: {context.GetBakTotalSpace()/1024} kB, {context.GetBakCount()} files";
+                deleteBakFiles.Enabled = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exception Caught", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void deleteBakFiles_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This action cannot be undone! You are responsible for backing up your files.\n" +
+                "Do you want to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                try
+                {
+                    context.DeleteBak();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Exception Caught", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

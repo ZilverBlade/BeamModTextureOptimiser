@@ -42,6 +42,7 @@ namespace BeamModTextureOptimiser
             this.browseModFolderBtn = new System.Windows.Forms.Button();
             this.modPathTextBox = new System.Windows.Forms.TextBox();
             this.openModFolderDialogue = new System.Windows.Forms.FolderBrowserDialog();
+            this.findBakFilesBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -57,7 +58,7 @@ namespace BeamModTextureOptimiser
             this.duplicateTexturesListbox.ItemHeight = 15;
             this.duplicateTexturesListbox.Location = new System.Drawing.Point(3, 27);
             this.duplicateTexturesListbox.Name = "duplicateTexturesListbox";
-            this.duplicateTexturesListbox.Size = new System.Drawing.Size(212, 469);
+            this.duplicateTexturesListbox.Size = new System.Drawing.Size(198, 469);
             this.duplicateTexturesListbox.TabIndex = 0;
             // 
             // splitContainer1
@@ -74,6 +75,7 @@ namespace BeamModTextureOptimiser
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.findBakFilesBtn);
             this.splitContainer1.Panel2.Controls.Add(this.bakExcessLabel);
             this.splitContainer1.Panel2.Controls.Add(this.excessStorageStatisticLabel);
             this.splitContainer1.Panel2.Controls.Add(this.deleteBakFiles);
@@ -83,8 +85,8 @@ namespace BeamModTextureOptimiser
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.browseModFolderBtn);
             this.splitContainer1.Panel2.Controls.Add(this.modPathTextBox);
-            this.splitContainer1.Size = new System.Drawing.Size(654, 497);
-            this.splitContainer1.SplitterDistance = 218;
+            this.splitContainer1.Size = new System.Drawing.Size(613, 497);
+            this.splitContainer1.SplitterDistance = 204;
             this.splitContainer1.TabIndex = 1;
             // 
             // duplicateTexturesLabel
@@ -116,9 +118,9 @@ namespace BeamModTextureOptimiser
             // 
             // deleteBakFiles
             // 
-            this.deleteBakFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteBakFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.deleteBakFiles.Enabled = false;
-            this.deleteBakFiles.Location = new System.Drawing.Point(13, 389);
+            this.deleteBakFiles.Location = new System.Drawing.Point(279, 389);
             this.deleteBakFiles.Name = "deleteBakFiles";
             this.deleteBakFiles.Size = new System.Drawing.Size(114, 47);
             this.deleteBakFiles.TabIndex = 6;
@@ -141,7 +143,7 @@ namespace BeamModTextureOptimiser
             // 
             this.remapDuplicatesBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.remapDuplicatesBtn.Enabled = false;
-            this.remapDuplicatesBtn.Location = new System.Drawing.Point(306, 442);
+            this.remapDuplicatesBtn.Location = new System.Drawing.Point(279, 442);
             this.remapDuplicatesBtn.Name = "remapDuplicatesBtn";
             this.remapDuplicatesBtn.Size = new System.Drawing.Size(114, 47);
             this.remapDuplicatesBtn.TabIndex = 4;
@@ -153,7 +155,7 @@ namespace BeamModTextureOptimiser
             // 
             this.checkDuplicatesBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkDuplicatesBtn.Enabled = false;
-            this.checkDuplicatesBtn.Location = new System.Drawing.Point(160, 442);
+            this.checkDuplicatesBtn.Location = new System.Drawing.Point(146, 442);
             this.checkDuplicatesBtn.Name = "checkDuplicatesBtn";
             this.checkDuplicatesBtn.Size = new System.Drawing.Size(114, 47);
             this.checkDuplicatesBtn.TabIndex = 3;
@@ -173,7 +175,7 @@ namespace BeamModTextureOptimiser
             // browseModFolderBtn
             // 
             this.browseModFolderBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browseModFolderBtn.Location = new System.Drawing.Point(345, 27);
+            this.browseModFolderBtn.Location = new System.Drawing.Point(318, 27);
             this.browseModFolderBtn.Name = "browseModFolderBtn";
             this.browseModFolderBtn.Size = new System.Drawing.Size(75, 23);
             this.browseModFolderBtn.TabIndex = 1;
@@ -187,14 +189,26 @@ namespace BeamModTextureOptimiser
             | System.Windows.Forms.AnchorStyles.Right)));
             this.modPathTextBox.Location = new System.Drawing.Point(13, 27);
             this.modPathTextBox.Name = "modPathTextBox";
-            this.modPathTextBox.Size = new System.Drawing.Size(326, 23);
+            this.modPathTextBox.Size = new System.Drawing.Size(299, 23);
             this.modPathTextBox.TabIndex = 0;
+            // 
+            // findBakFilesBtn
+            // 
+            this.findBakFilesBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.findBakFilesBtn.Enabled = false;
+            this.findBakFilesBtn.Location = new System.Drawing.Point(146, 389);
+            this.findBakFilesBtn.Name = "findBakFilesBtn";
+            this.findBakFilesBtn.Size = new System.Drawing.Size(114, 47);
+            this.findBakFilesBtn.TabIndex = 9;
+            this.findBakFilesBtn.Text = "Find .bak";
+            this.findBakFilesBtn.UseVisualStyleBackColor = true;
+            this.findBakFilesBtn.Click += new System.EventHandler(this.findBakFilesBtn_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 497);
+            this.ClientSize = new System.Drawing.Size(613, 497);
             this.Controls.Add(this.splitContainer1);
             this.Name = "MainForm";
             this.Text = "BeamModTextureOptimiser";
@@ -224,6 +238,7 @@ namespace BeamModTextureOptimiser
         private System.Windows.Forms.Button deleteBakFiles;
         private System.Windows.Forms.Label bakExcessLabel;
         private System.Windows.Forms.Label excessStorageStatisticLabel;
+        private System.Windows.Forms.Button findBakFilesBtn;
     }
 }
 

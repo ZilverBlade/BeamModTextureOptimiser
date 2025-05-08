@@ -9,11 +9,15 @@ namespace BeamModTextureOptimiser
 {
     public class ModContext
     {
+        private List<string> bakFiles = new List<string>();
+        private long bakFileStorage = 0;
+
         private uint totalDuplicates;
         private Dictionary<TextureIdentifier, List<TextureInfo>> mappedDuplicates = new Dictionary<TextureIdentifier, List<TextureInfo>>();
         private HashSet<string> toReplaceStrings = new HashSet<string>();
         private string path = null;
         DirectoryInfo vehicleDirInfo = null;
+        DirectoryInfo rootDirInfo = null;
         public ModContext()
         {
 
@@ -28,6 +32,7 @@ namespace BeamModTextureOptimiser
             }
             this.path = path;
             vehicleDirInfo = new DirectoryInfo(path + "/vehicles");
+            rootDirInfo = new DirectoryInfo(path);
         }
         public void FindDuplicates()
         {
@@ -204,9 +209,48 @@ namespace BeamModTextureOptimiser
         {
             return totalDuplicates;
         }
+        public int GetBakCount()
+        {
+            return bakFiles.Count;
+        }
+        public long GetBakTotalSpace()
+        {
+            return bakFileStorage;
+        }
+        public void FindBak()
+        {
+            Debug.Assert(rootDirInfo != null, "Root directory must not be null!");
+            bakFiles.Clear();
+            bakFileStorage = 0;
+            foreach (var file in vehicleDirInfo.EnumerateFiles("*.bak", SearchOption.AllDirectories))
+            {
+                bakFiles.Add(file.FullName);
+                bakFileStorage += (long)file.Length;
+            }
+          }
         public void DeleteBak()
         {
-            throw new NotImplementedException();
+            Debug.Assert(rootDirInfo != null, "Root directory must not be null!");
+            if (bakFiles.Count == 0) return;
+
+            IProgressDialog progress = Win32Factory.CreateProgressDialogue();
+            progress.StartProgressDialog(IntPtr.Zero, null, ProgressDialogFlags.Normal, IntPtr.Zero);
+            progress.SetTitle("Remapping files...");
+            progress.SetLine(1, "Deleting bak files...", false, IntPtr.Zero);
+            progress.SetProgress(0, (uint)bakFiles.Count);
+            uint i = 0;
+            foreach (var file in bakFiles)
+            {
+                progress.SetLine(2, $"Deleting {file}", false, IntPtr.Zero);
+                File.Delete(file);
+                progress.SetProgress(i++, (uint)bakFiles.Count);
+                if (progress.HasUserCancelled())
+                {
+                    progress.StopProgressDialog();
+                    return;
+                }
+            }
+            progress.StopProgressDialog();
         }
     }
 }
